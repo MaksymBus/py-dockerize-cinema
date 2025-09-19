@@ -3,7 +3,7 @@ LABEL maintainer="maksbusl@gmail.com"
 
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR app/
+WORKDIR /app
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
@@ -13,8 +13,9 @@ RUN groupadd -r my_user_group && useradd --no-log-init -r -g my_user_group my_us
 COPY . .
 
 RUN mkdir -p /files/media
+RUN mkdir -p /files/static
 
-RUN chown -R my_user:my_user_group /files/media
-RUN chmod -R 755 /files/media
+RUN chown -R my_user:my_user_group /files/media /files/static
+RUN chmod -R 755 /files/media /files/static
 
 USER my_user
